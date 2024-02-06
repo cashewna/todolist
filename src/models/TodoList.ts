@@ -1,9 +1,11 @@
+import Todo from './interfaces/Todo';
+
 class TodoList {
-    #todos: string[] = [];
+    #todos: Todo[] = [];
     constructor() {
     }
     
-    public addTodo(todo: string): void {
+    public addTodo(todo: Todo): void {
         this.#todos.push(todo);
     }
     
@@ -11,11 +13,11 @@ class TodoList {
         this.#todos.splice(index, 1);
     }
     
-    public updateTodo(index: number, todo: string): void {
-        this.#todos[index] = todo;
+    public updateTodoTitle(index: number, todo: string): void {
+        this.#todos[index].title = todo;
     }
     
-    public getTodos(): string[] {
+    public getTodos(): Todo[] {
         return this.#todos;
     }
 }
