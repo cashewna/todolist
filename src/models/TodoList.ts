@@ -1,6 +1,7 @@
+import TodoListOperations from '../shared/TodoListOperations';
 import Todo from './interfaces/Todo';
 
-class TodoList {
+class TodoList implements TodoListOperations {
     #todos: Todo[] = [];
     constructor() {
     }
