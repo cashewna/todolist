@@ -11,6 +11,7 @@ class TodoList {
         todos.forEach((todo: Todo, index) => {
             const todoElement = document.createElement("li");
 
+            const leftDiv = document.createElement("div");
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.checked = todo.isDone;
@@ -21,34 +22,37 @@ class TodoList {
                 });
                 this.#todoListElement.dispatchEvent(event);
             });
-            todoElement.appendChild(checkbox);
+            leftDiv.appendChild(checkbox);
+            todoElement.appendChild(leftDiv);
 
+            const rightDiv = document.createElement("div");
             const title = document.createElement('h1');
             title.textContent = todo.title;
-            todoElement.appendChild(title);
+            rightDiv.appendChild(title);
 
             if (todo.description) {
                 const description = document.createElement('p');
                 description.textContent = todo.description;
-                todoElement.appendChild(description);
+                rightDiv.appendChild(description);
             }
 
             if (todo.dueDate && !isNaN(todo.dueDate.getTime())) {
                 const dueDate = document.createElement('p');
                 dueDate.textContent = todo.dueDate.toLocaleDateString();
-                todoElement.appendChild(dueDate);
+                rightDiv.appendChild(dueDate);
             }
 
             if (todo.priority && !isNaN(todo.priority)) {
                 const priority = document.createElement('p');
                 priority.textContent = `Priority: ${todo.priority.toString()}`;
-                todoElement.appendChild(priority);
+                rightDiv.appendChild(priority);
             }
 
             if (todo.isDone) {
                 todoElement.classList.add('done');
             }
 
+            todoElement.appendChild(rightDiv);
             this.#todoListElement.appendChild(todoElement);
         });
     }
