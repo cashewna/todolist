@@ -1,21 +1,13 @@
-import TodoListOperations from '../shared/TodoListOperations';
-import Todo from './interfaces/Todo';
+import { Todo } from "../shared/Todo";
 
-class TodoList implements TodoListOperations {
-    #todos: Todo[] = [];
+class TodoList {
+    #todos: Todo[];
     constructor() {
+        this.#todos = [];
     }
     
     public addTodo(todo: Todo): void {
         this.#todos.push(todo);
-    }
-    
-    public removeTodo(index: number): void {
-        this.#todos.splice(index, 1);
-    }
-    
-    public updateTodoTitle(index: number, todo: string): void {
-        this.#todos[index].title = todo;
     }
     
     public getTodos(): Todo[] {
@@ -23,4 +15,4 @@ class TodoList implements TodoListOperations {
     }
 }
 
-export default TodoList;
+export { TodoList };

@@ -32,6 +32,44 @@ header {
     }
 }
 
+#content {
+    background-color: var(--950);
+    padding-top: 1rem;
+    ul#todo-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    ul#todo-list li {
+        color: var(--100);
+        background-color: var(--700);
+        border-radius: 5px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        margin: 0.5rem;
+
+        h1 {
+            font-size: 1.5rem;
+        }
+    }
+
+    #add-todo {
+        position: fixed;
+        bottom: 6rem;
+        right: 1rem;
+        background-color: orange;
+        background-image: url(../assets/plus.svg);
+        background-size: 50%;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        border-radius: 50%;
+        border-style: none;
+        width: 4rem;
+        height: 4rem;
+    }
+}
+
 footer {
     height: 5rem;
     background-color: var(--900);
