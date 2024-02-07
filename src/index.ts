@@ -1,9 +1,33 @@
 import './css/style.css';
-import ContentView from './views/ContentView';
-import Controller from './controllers/Controller';
-import TodoList from './models/TodoList';
+import { Main as MainView } from './views/Main';
+import { TodoList as TodoListModel } from './models/TodoList';
+import { TodoList as TodoListView } from './views/TodoList';
+import { TodoList as TodoListController } from './controllers/TodoList';
+import { Todo } from './shared/Todo';
 
-const todoView = new ContentView();
-const todoModel = new TodoList();
-const contentController = new Controller(todoView, todoModel);
-contentController.render();
+const mainView = new MainView();
+mainView.render();
+
+const todoListElement = document.getElementById('todo-list') as HTMLUListElement;
+const todoListModel = new TodoListModel();
+const todoListView = new TodoListView(todoListElement);
+const todoListController = new TodoListController(todoListModel, todoListView);
+
+// Test
+const todo: Todo = {
+    title: "Test Todo",
+    description: "Test Description",
+    dueDate: new Date(),
+    priority: 1
+}
+
+const todo2: Todo = {
+    title: "Test Todo 2",
+    description: "Test Description 2",
+    dueDate: new Date(),
+    priority: 2
+}
+
+todoListController.addTodo(todo);
+todoListController.addTodo(todo2);
+console.log(todoListModel.getTodos());

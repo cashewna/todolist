@@ -11,24 +11,22 @@
     <header>
         <span>Todo List</span>
     </header>
+
+
     <div id="content">
-        <form>
-            <input type="text" id="new-todo" placeholder="What needs to be done?">
-        </form>
         <ul id="todo-list"></ul>
-        <span id="todo-count"></span>
-        <ul id="filters">
-            <li>
-                <a href="#/" class="selected">All</a>
-            </li>
-            <li>
-                <a href="#/active">Active</a>
-            </li>
-            <li>
-                <a href="#/completed">Completed</a>
-            </li>
-        </ul>
-        <button id="clear-completed">Clear completed</button>
+
+        <dialog id="add-todo-dialog">
+            <form id="add-todo-form">
+                <input type="text" name="title" id="todo-input" placeholder="What would you like to do?" required>
+                <input type="text" name="description" id="todo-input" placeholder="Description">
+                <input type="datetime-local" name="dueDate" id="todo-date">
+                <input type="number" name="priority" id="todo-priority" placeholder="Priority">
+                <button id="submit-todo">Add</button>
+            </form>
+        </dialog>
+
+        <button id="add-todo-btn"></button>
     </div>
 
     <footer>

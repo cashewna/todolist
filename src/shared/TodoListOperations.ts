@@ -1,10 +1,7 @@
-import Todo from "../models/interfaces/Todo";
+import { Todo } from './Todo';
 
 interface TodoListOperations {
-    addTodo(todo: Todo): void;
-    removeTodo(index: number): void;
-    updateTodoTitle(index: number, todo: string): void;
-    getTodos(): Todo[];
+    addTodo: (todo: Todo) => void;
 }
 
-export default TodoListOperations;
+export { TodoListOperations };
