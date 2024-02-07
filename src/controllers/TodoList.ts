@@ -42,6 +42,7 @@ class TodoList implements TodoListOperations {
             };
 
             this.addTodo(todo);
+            form.reset();
         });
     }
 
