@@ -8,8 +8,20 @@ class TodoList {
 
     public render(todos: Todo[]): void {
         this.#todoListElement.innerHTML = "";
-        todos.forEach((todo: Todo) => {
+        todos.forEach((todo: Todo, index) => {
             const todoElement = document.createElement("li");
+
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = todo.isDone;
+            checkbox.classList.add("todo-checkbox");
+            checkbox.addEventListener('change', () => {
+                const event = new CustomEvent('todoChanged', {
+                    detail: { index, isDone: checkbox.checked }
+                });
+                this.#todoListElement.dispatchEvent(event);
+            });
+            todoElement.appendChild(checkbox);
 
             const title = document.createElement('h1');
             title.textContent = todo.title;
@@ -31,6 +43,10 @@ class TodoList {
                 const priority = document.createElement('p');
                 priority.textContent = `Priority: ${todo.priority.toString()}`;
                 todoElement.appendChild(priority);
+            }
+
+            if (todo.isDone) {
+                todoElement.classList.add('done');
             }
 
             this.#todoListElement.appendChild(todoElement);
@@ -56,6 +72,10 @@ class TodoList {
                 dialog.close();
             }
         });
+    }
+
+    public getTodoListElement(): HTMLUListElement {
+        return this.#todoListElement;
     }
 }
 

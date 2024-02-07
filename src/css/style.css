@@ -53,6 +53,13 @@ header {
         }
     }
 
+    .done {
+        h1,
+        p {
+            color: var(--500);
+        }
+    }
+
     #add-todo-btn {
         position: fixed;
         bottom: 6rem;

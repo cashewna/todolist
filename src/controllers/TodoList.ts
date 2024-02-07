@@ -12,6 +12,7 @@ class TodoList implements TodoListOperations {
         this.#view = view;
         this.handleAddTodoButtonClick();
         this.handleAddTodoFormSubmit();
+        this.handleTodoChange();
     }
 
     public addTodo(todo: Todo): void {
@@ -36,10 +37,20 @@ class TodoList implements TodoListOperations {
                 title: titleInput.value,
                 description: descriptionInput.value,
                 dueDate: new Date(dueDateInput.value),
-                priority: parseInt(priorityInput.value)
+                priority: parseInt(priorityInput.value),
+                isDone: false
             };
 
             this.addTodo(todo);
+        });
+    }
+
+    private handleTodoChange(): void {
+        this.#view.getTodoListElement().addEventListener('todoChanged', (event: CustomEvent) => {
+            const { index, isDone } = event.detail;
+            const todo = this.#model.getTodos()[index];
+            this.#model.setIsDone(todo, isDone);
+            this.#view.render(this.#model.getTodos());
         });
     }
 }

@@ -3,6 +3,7 @@ interface Todo {
     description?: string;
     dueDate?: Date;
     priority?: number;
+    isDone: boolean;
 }
 
 export { Todo };
