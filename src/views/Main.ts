@@ -1,5 +1,3 @@
-import { TodoList as TodoListView } from "./TodoList";
-
 class Main {
 
     constructor() {

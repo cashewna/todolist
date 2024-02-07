@@ -28,6 +28,22 @@ class TodoList {
             this.#todoListElement.appendChild(todoElement);
         });
     }
+
+    public showAddTodoDialog(): void {
+        const addTodoButton = document.getElementById('add-todo-btn') as HTMLButtonElement;
+        const dialog = document.getElementById('add-todo-dialog') as HTMLDialogElement;
+
+        addTodoButton.addEventListener('click', () => {
+            dialog.showModal();
+        });
+
+        // Close the dialog when the user clicks outside of it
+        window.addEventListener('click', (event: MouseEvent) => {
+            if (event.target === dialog) {
+                dialog.close();
+            }
+        });
+    }
 }
 
 export { TodoList };

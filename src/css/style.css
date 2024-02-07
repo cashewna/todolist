@@ -53,7 +53,7 @@ header {
         }
     }
 
-    #add-todo {
+    #add-todo-btn {
         position: fixed;
         bottom: 6rem;
         right: 1rem;

@@ -10,11 +10,16 @@ class TodoList implements TodoListOperations {
     constructor(model: TodoListModel, view: TodoListView) {
         this.#model = model;
         this.#view = view;
+        this.handleAddTodoButtonClick();
     }
 
     public addTodo(todo: Todo): void {
         this.#model.addTodo(todo);
         this.#view.render(this.#model.getTodos());
+    }
+
+    private handleAddTodoButtonClick(): void {
+        this.#view.showAddTodoDialog();
     }
 }
 
