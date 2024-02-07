@@ -13,17 +13,25 @@ class TodoList {
 
             const title = document.createElement('h1');
             title.textContent = todo.title;
+            todoElement.appendChild(title);
 
-            const description = document.createElement('p');
-            description.textContent = todo.description;
+            if (todo.description) {
+                const description = document.createElement('p');
+                description.textContent = todo.description;
+                todoElement.appendChild(description);
+            }
 
-            const dueDate = document.createElement('p');
-            dueDate.textContent = todo.dueDate.toLocaleDateString();
+            if (todo.dueDate && !isNaN(todo.dueDate.getTime())) {
+                const dueDate = document.createElement('p');
+                dueDate.textContent = todo.dueDate.toLocaleDateString();
+                todoElement.appendChild(dueDate);
+            }
 
-            const priority = document.createElement('p');
-            priority.textContent = `Priority: ${todo.priority.toString()}`;
-
-            todoElement.append(title, description, dueDate, priority);
+            if (todo.priority && !isNaN(todo.priority)) {
+                const priority = document.createElement('p');
+                priority.textContent = `Priority: ${todo.priority.toString()}`;
+                todoElement.appendChild(priority);
+            }
 
             this.#todoListElement.appendChild(todoElement);
         });
@@ -33,13 +41,18 @@ class TodoList {
         const addTodoButton = document.getElementById('add-todo-btn') as HTMLButtonElement;
         const dialog = document.getElementById('add-todo-dialog') as HTMLDialogElement;
 
-        addTodoButton.addEventListener('click', () => {
-            dialog.showModal();
+        addTodoButton.addEventListener('click', (event) => {
+            // Stop the propagation of the click event
+            // to prevent the dialog from closing immediately
+            event.stopPropagation();
+            dialog.show();
+            this.closeAddTodoDialog(dialog);
         });
+    }
 
-        // Close the dialog when the user clicks outside of it
-        window.addEventListener('click', (event: MouseEvent) => {
-            if (event.target === dialog) {
+    public closeAddTodoDialog(dialog: HTMLDialogElement): void {
+        document.addEventListener('click', (event: MouseEvent) => {
+            if (!dialog.contains(event.target as Node)) {
                 dialog.close();
             }
         });

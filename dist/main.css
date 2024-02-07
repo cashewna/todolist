@@ -58,7 +58,7 @@ header {
         bottom: 6rem;
         right: 1rem;
         background-color: orange;
-        background-image: url(../assets/plus.svg);
+        background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBVcGxvYWRlZCB0bzogU1ZHIFJlcG8sIHd3dy5zdmdyZXBvLmNvbSwgR2VuZXJhdG9yOiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIGZpbGw9IiMwMDAwMDAiIHZlcnNpb249IjEuMSIgaWQ9IkNhcGFfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgDQoJIHdpZHRoPSI4MDBweCIgaGVpZ2h0PSI4MDBweCIgdmlld0JveD0iMCAwIDQ1LjQwMiA0NS40MDIiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPHBhdGggZD0iTTQxLjI2NywxOC41NTdIMjYuODMyVjQuMTM0QzI2LjgzMiwxLjg1MSwyNC45OSwwLDIyLjcwNywwYy0yLjI4MywwLTQuMTI0LDEuODUxLTQuMTI0LDQuMTM1djE0LjQzMkg0LjE0MQ0KCQljLTIuMjgzLDAtNC4xMzksMS44NTEtNC4xMzgsNC4xMzVjLTAuMDAxLDEuMTQxLDAuNDYsMi4xODcsMS4yMDcsMi45MzRjMC43NDgsMC43NDksMS43OCwxLjIyMiwyLjkyLDEuMjIyaDE0LjQ1M1Y0MS4yNw0KCQljMCwxLjE0MiwwLjQ1MywyLjE3NiwxLjIwMSwyLjkyMmMwLjc0OCwwLjc0OCwxLjc3NywxLjIxMSwyLjkxOSwxLjIxMWMyLjI4MiwwLDQuMTI5LTEuODUxLDQuMTI5LTQuMTMzVjI2Ljg1N2gxNC40MzUNCgkJYzIuMjgzLDAsNC4xMzQtMS44NjcsNC4xMzMtNC4xNUM0NS4zOTksMjAuNDI1LDQzLjU0OCwxOC41NTcsNDEuMjY3LDE4LjU1N3oiLz4NCjwvZz4NCjwvc3ZnPg==);
         background-size: 50%;
         background-position: center;
         background-repeat: no-repeat;
@@ -69,28 +69,23 @@ header {
         height: 4rem;
     }
 
-    /** Bug: Dialog animation not working */
     @keyframes slideUp {
         from {
-            transform: translateY(-110%);
+            margin-bottom: -100%;
         }
         to {
-            transform: translateY(0%);
+            margin-bottom: 0;
         }
-    }
-
-    dialog[open] {
-        animation: slideUp 3s ease normal;
     }
 
     dialog {
-        position: fixed;
         border-radius: 0.8rem;
         padding: 1.6rem;
         min-width: 100%;
         bottom: 0;
         z-index: 100;
         background-color: var(--900);
+        animation: slideUp 3s ease-in;
 
         form {
             display: flex;
