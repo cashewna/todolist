@@ -18,14 +18,16 @@ const todo: Todo = {
     title: "Test Todo",
     description: "Test Description",
     dueDate: new Date(),
-    priority: 1
+    priority: 1,
+    isDone: false
 }
 
 const todo2: Todo = {
     title: "Test Todo 2",
     description: "Test Description 2",
     dueDate: new Date(),
-    priority: 2
+    priority: 2,
+    isDone: true
 }
 
 todoListController.addTodo(todo);

@@ -35,6 +35,17 @@ header {
 #content {
     background-color: var(--950);
     padding-top: 1rem;
+
+    #todo-list > li {
+        display: grid;
+        grid-template-columns: 1fr 10fr;
+        .todo-checkbox {
+            grid-column: 1 / 2;
+            margin-top: 0.5rem;
+            transform: scale(1.5);
+        }
+    }
+
     ul#todo-list {
         list-style: none;
         padding: 0;
@@ -50,6 +61,13 @@ header {
 
         h1 {
             font-size: 1.5rem;
+        }
+    }
+
+    .done {
+        h1,
+        p {
+            color: var(--500);
         }
     }
 
