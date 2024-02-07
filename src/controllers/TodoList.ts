@@ -6,10 +6,12 @@ import { TodoList as TodoListView } from "../views/TodoList";
 class TodoList implements TodoListOperations {
     #model: TodoListModel;
     #view: TodoListView;
+    #dialog: HTMLDialogElement;
 
     constructor(model: TodoListModel, view: TodoListView) {
         this.#model = model;
         this.#view = view;
+        this.#dialog = document.getElementById('add-todo-dialog') as HTMLDialogElement;
         this.handleAddTodoButtonClick();
         this.handleAddTodoFormSubmit();
         this.handleTodoChange();
@@ -18,10 +20,11 @@ class TodoList implements TodoListOperations {
     public addTodo(todo: Todo): void {
         this.#model.addTodo(todo);
         this.#view.render(this.#model.getTodos());
+        this.#dialog.close();
     }
 
     private handleAddTodoButtonClick(): void {
-        this.#view.showAddTodoDialog();
+        this.#view.showAddTodoDialog(this.#dialog);
     }
 
     private handleAddTodoFormSubmit(): void {

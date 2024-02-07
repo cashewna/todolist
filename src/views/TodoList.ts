@@ -57,9 +57,8 @@ class TodoList {
         });
     }
 
-    public showAddTodoDialog(): void {
+    public showAddTodoDialog(dialog: HTMLDialogElement): void {
         const addTodoButton = document.getElementById('add-todo-btn') as HTMLButtonElement;
-        const dialog = document.getElementById('add-todo-dialog') as HTMLDialogElement;
 
         addTodoButton.addEventListener('click', (event) => {
             // Stop the propagation of the click event
