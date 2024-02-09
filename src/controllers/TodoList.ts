@@ -61,6 +61,7 @@ class TodoList implements TodoListOperations {
 
     public showTodos(project: ProjectModel): void {
         const todos = project.getTodos();
+        this.#view.addProjectTitle(project.getProjectTitle());
         this.#view.render(todos);
     }
 }

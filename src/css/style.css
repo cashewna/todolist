@@ -94,7 +94,7 @@ header {
 
 #content {
     background-color: var(--950);
-    padding-top: 1rem;
+    padding: 1rem;
 
     #todo-list>li {
         display: grid;
@@ -105,6 +105,7 @@ header {
             margin-top: 0.5rem;
             transform: scale(1.5);
         }
+        margin-bottom: 1rem;
     }
 
     ul#todo-list {
@@ -118,7 +119,6 @@ header {
         border-radius: 5px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         padding: 1rem;
-        margin: 0.5rem;
 
         h1 {
             font-size: 1.5rem;
@@ -126,7 +126,6 @@ header {
     }
 
     .done {
-
         h1,
         p {
             color: var(--500);
@@ -193,6 +192,12 @@ header {
                 border-radius: 0.5rem;
             }
         }
+    }
+
+    .project-title {
+        color: var(--50);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
     }
 }
 
