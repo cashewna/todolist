@@ -1,10 +1,5 @@
-import { Sidebar } from "./Sidebar";
 class Main {
-    #sidebar: Sidebar;
-
     constructor() {
-        const sidebar = this.#sidebar = new Sidebar();
-        sidebar.render();
     }
 
     public render(): void {

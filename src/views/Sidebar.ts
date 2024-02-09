@@ -1,16 +1,50 @@
+import { Sidebar as SidebarController } from "../controllers/Sidebar";
+
 class Sidebar {
     #hamburger: HTMLElement;
+    #sidebar: HTMLElement;
+    #unorderedList: HTMLUListElement;
+
     constructor() {
         this.#hamburger = document.getElementById("hamburger");
+        this.#sidebar = document.getElementById("sidebar");
+        this.#unorderedList = document.querySelector("#sidebar > ul");
     }
 
     public render() {
         this.#hamburger.addEventListener("click", () => {
-            const sidebar = document.getElementById("sidebar");
-            if (sidebar) {
-                sidebar.classList.toggle("open");
+            if (this.#sidebar) {
+                this.#sidebar.classList.toggle("open");
             }
             this.#hamburger.classList.toggle("open");
+        });
+    }
+
+    public hasClass(className: string): boolean {
+        return this.#hamburger.classList.contains(className);
+    }
+
+    public displayProjects(projectTitles: string[]): void {
+        if (this.#sidebar) {
+            this.#unorderedList.innerHTML = "";
+            projectTitles.forEach(title => {
+                const listElement = document.createElement("li");
+                listElement.textContent = title;
+                this.#unorderedList.appendChild(listElement);
+                this.addProjectEventListener(listElement);
+            });
+            this.#sidebar.appendChild(this.#unorderedList);
+        }
+    }
+
+    public showErrorMessage(message: string): void {
+        alert(message);
+    }
+
+    private addProjectEventListener(listElement: HTMLLIElement): void {
+        listElement.addEventListener("click", () => {
+            const projectTitle = listElement.textContent;
+            console.log(`Project ${projectTitle} clicked!`);
         });
     }
 }

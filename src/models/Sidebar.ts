@@ -1,29 +1,25 @@
-import { Project } from "../shared/Project";
+import { Project as ProjectModel } from "../models/Project";
 
 class Sidebar {
-    #projects: Project[];
+    #projects: ProjectModel[];
 
     constructor() {
         this.#projects = [];
     }
 
     private projectExists(name: string): boolean {
-        return false;
+        return this.#projects.some(project => project.getProjectTitle() === name);
     }
 
-    public addProject(name: string): void {
-        if (this.projectExists(name)) {
-            throw new Error('Project already exists');
+    public addProject(project: ProjectModel): void {
+        if (this.projectExists(project.getProjectTitle())) {
+            throw new Error(`Project ${project.getProjectTitle()} already exists`);
         }
 
-        const newProject: Project = {
-            title: name,
-            todos: []
-        };
-        this.#projects.push(newProject);
+        this.#projects.push(project);
     }
 
-    public getProjects(): Project[] {
+    public getProjects(): ProjectModel[] {
         return this.#projects;
     }
 }

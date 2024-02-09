@@ -36,7 +36,6 @@ header {
     }
 
     #hamburger {
-
         .bar1,
         .bar2,
         .bar3 {
@@ -69,6 +68,24 @@ header {
     background-color: var(--800);
     transition: right 0.3s ease;
     z-index: 101;
+    padding: 1rem;
+
+    h1 {
+        color: var(--50);
+        font-size: 1.5rem;
+    }
+
+    ul {
+        padding: 0.5rem;
+    }
+
+    li {
+        list-style: none;
+        margin: 0.5rem 0;
+        padding: 0;
+        color: var(--50);
+        font-size: 1.2rem;
+    }
 }
 
 #sidebar.open {
