@@ -1,40 +1,28 @@
-import { Todo } from "../shared/Todo";
+import { ProjectInterface } from "../interfaces/Project";
+import { TodoItemModel } from "./TodoItem";
 
 class Project {
-    #title: string;
-    #todos: Todo[];
+    private project: ProjectInterface;
 
-    constructor(title: string) {
-        this.#title = title;
-        this.#todos = [];
+    constructor(project: ProjectInterface) {
+        this.project = project;
     }
 
-    public addTodo(todo: Todo): void {
-        this.#todos.push(todo);
+    public addTodo(todo: TodoItemModel) {
+        this.project.todos.push(todo);
     }
 
-    public removeTodo(todoTitle: string): void {
-        this.#todos = this.#todos.filter(todo => todo.title !== todoTitle);
+    public getLength(): number {
+        return this.project.todos.length;
     }
 
-    public updateTodo(todoTitle: string, updatedTodo: Todo): void {
-        const index = this.#todos.findIndex(todo => todo.title === todoTitle);
-        if (index !== -1) {
-            this.#todos[index] = updatedTodo;
-        }
+    public getName(): string {
+        return this.project.name;
     }
 
-    public getTodo(todoTitle: string): Todo | undefined {
-        return this.#todos.find(todo => todo.title === todoTitle);
-    }
-
-    public getTodos(): Todo[] {
-        return this.#todos;
-    }
-
-    public getProjectTitle(): string {
-        return this.#title;
+    public getTodos(): TodoItemModel[] {
+        return this.project.todos;
     }
 }
 
-export { Project };
+export { Project as ProjectModel };
