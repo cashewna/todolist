@@ -2,6 +2,7 @@ import { Todo } from "../shared/Todo";
 import { TodoListOperations } from "../shared/TodoListOperations";
 import { TodoList as TodoListModel } from "../models/TodoList";
 import { TodoList as TodoListView } from "../views/TodoList";
+import { Project as ProjectModel } from "../models/Project";
 
 class TodoList implements TodoListOperations {
     #model: TodoListModel;
@@ -56,6 +57,11 @@ class TodoList implements TodoListOperations {
             this.#model.setIsDone(todo, isDone);
             this.#view.render(this.#model.getTodos());
         });
+    }
+
+    public showTodos(project: ProjectModel): void {
+        const todos = project.getTodos();
+        this.#view.render(todos);
     }
 }
 

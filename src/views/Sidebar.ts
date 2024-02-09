@@ -4,11 +4,13 @@ class Sidebar {
     #hamburger: HTMLElement;
     #sidebar: HTMLElement;
     #unorderedList: HTMLUListElement;
+    #sidebarController: SidebarController;
 
-    constructor() {
+    constructor(sidebarController: SidebarController) {
         this.#hamburger = document.getElementById("hamburger");
         this.#sidebar = document.getElementById("sidebar");
         this.#unorderedList = document.querySelector("#sidebar > ul");
+        this.#sidebarController = sidebarController;
     }
 
     public render() {
@@ -44,7 +46,7 @@ class Sidebar {
     private addProjectEventListener(listElement: HTMLLIElement): void {
         listElement.addEventListener("click", () => {
             const projectTitle = listElement.textContent;
-            console.log(`Project ${projectTitle} clicked!`);
+            this.#sidebarController.showProject(projectTitle);
         });
     }
 }
