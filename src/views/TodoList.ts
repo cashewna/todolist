@@ -2,12 +2,19 @@ import { Todo } from "../shared/Todo";
 
 class TodoList {
     #todoListElement: HTMLUListElement;
+    #projectTitle: HTMLHeadingElement;
+
     constructor(todoListElement: HTMLUListElement) {
         this.#todoListElement = todoListElement;
     }
 
     public render(todos: Todo[]): void {
         this.#todoListElement.innerHTML = "";
+
+        if (this.#projectTitle) {
+            this.#todoListElement.appendChild(this.#projectTitle);
+        }
+
         todos.forEach((todo: Todo, index) => {
             const todoElement = document.createElement("li");
 
@@ -79,6 +86,13 @@ class TodoList {
 
     public getTodoListElement(): HTMLUListElement {
         return this.#todoListElement;
+    }
+
+    public addProjectTitle(title: string): void {
+        const projectTitle = document.createElement('h1');
+        projectTitle.classList.add('project-title');
+        projectTitle.textContent = title;
+        this.#projectTitle = projectTitle;
     }
 }
 

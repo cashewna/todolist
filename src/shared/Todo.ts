@@ -4,6 +4,7 @@ interface Todo {
     dueDate?: Date;
     priority?: number;
     isDone: boolean;
+    project?: string;
 }
 
 export { Todo };

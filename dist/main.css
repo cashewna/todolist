@@ -27,9 +27,35 @@ body {
 header {
     height: 5rem;
     background-color: var(--900);
+    display: flex;
+    justify-content: space-between;
+
     span {
         font-size: 1.5rem;
     }
+
+    button {
+        background-color: var(--800);
+        color: var(--50);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border: none;
+        margin: 1rem;
+    }
+}
+
+#sidebar {
+    position: fixed;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: var(--800);
+    transition: right 0.3s ease;
+    z-index: 101;
+}
+
+#sidebar.open {
+    right: 0;
 }
 
 #content {
