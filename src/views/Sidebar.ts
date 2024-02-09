@@ -13,15 +13,6 @@ class Sidebar {
         this.#sidebarController = sidebarController;
     }
 
-    public render() {
-        this.#hamburger.addEventListener("click", () => {
-            if (this.#sidebar) {
-                this.#sidebar.classList.toggle("open");
-            }
-            this.#hamburger.classList.toggle("open");
-        });
-    }
-
     public hasClass(className: string): boolean {
         return this.#hamburger.classList.contains(className);
     }

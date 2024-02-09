@@ -4,7 +4,6 @@ import { TodoList as TodoListModel } from './models/TodoList';
 import { TodoList as TodoListView } from './views/TodoList';
 import { TodoList as TodoListController } from './controllers/TodoList';
 import { Sidebar as SidebarModel } from './models/Sidebar';
-import { Sidebar as SidebarView } from './views/Sidebar';
 import { Sidebar as SidebarController } from './controllers/Sidebar';
 import { Project as ProjectController } from './controllers/Project';
 import { Project as ProjectModel } from './models/Project';
@@ -21,6 +20,12 @@ const todoListController = new TodoListController(todoListModel, todoListView);
 
 const sidebarModel = new SidebarModel();
 const sidebarController = new SidebarController(sidebarModel, todoListController);
+
+const allProjectsModel = new ProjectModel('All');
+const allProjectsView = new ProjectView();
+const allProjectsController = new ProjectController(allProjectsModel, allProjectsView);
+sidebarController.addProject(allProjectsController);
+sidebarController.showProject('All');
 
 // Test data
 
@@ -44,6 +49,9 @@ const todoTwo: Todo = {
 
 todoListController.addTodo(todoOne);
 todoListController.addTodo(todoTwo);
+
+allProjectsController.addTodo(todoOne);
+allProjectsController.addTodo(todoTwo);
 
 const projectOneModel = new ProjectModel('Project 1');
 const projectTwoModel = new ProjectModel('Project 2');

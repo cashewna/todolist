@@ -15,10 +15,12 @@ class Sidebar {
         this.#view = new SidebarView(this);
         this.#todoListController = todoListController;
         this.#projects = [];
+        this.toggleSidebar();
         this.renderData();
     }
 
     public addProject(projectController: ProjectController): void {
+        console.log(projectController.getModel());
         try {
             this.#model.addProject(projectController.getModel());
             this.renderData();
@@ -31,7 +33,6 @@ class Sidebar {
         const projects = this.#model.getProjects();
         const projectTitles = projects.map(project => project.getProjectTitle());
         this.#view.displayProjects(projectTitles);
-        this.#view.render();
     }
 
     public showProject(projectTitle: string): void {
@@ -39,6 +40,15 @@ class Sidebar {
         if (project) {
             this.#todoListController.showTodos(project);
         }
+    }
+
+    private toggleSidebar(): void {
+        const hamburger = document.getElementById("hamburger");
+        const sidebar = document.getElementById("sidebar");
+
+        hamburger.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+        });
     }
 }
 
