@@ -45,19 +45,32 @@ class TodoListViewModel {
         this.sidebarView.addProject(newProject.getId(), name);
     }
 
-    public addTodoToSelectedProject(projectId: number, title: string, description?: string): void {
-        const project = this.projects.find(project => project.getId() === projectId);
+    public addTodoToSelectedProject(
+        projectId: string,
+        title: string,
+        description?: string,
+        dueDate?: string,
+        priority?: string
+    ): void {
         const allProject = this.projects[0];
 
+        let projectIdNumber = parseInt(projectId as string);
+        if (isNaN(projectIdNumber)) {
+            projectIdNumber = ALL_PROJECT_ID;
+        }
+
+        // Check if project exists
+        const project = this.projects.find(project => project.getId() === projectIdNumber);
+
         if (project) {
-            const newTodo = new Todo(projectId, title, description);
+            const newTodo = new Todo(projectIdNumber, title, description);
             project.addTodo(newTodo);
 
-            if (this.selectedProject.getId() !== ALL_PROJECT_ID) {
+            if (projectIdNumber !== ALL_PROJECT_ID) {
                 allProject.addTodo(newTodo);
             }
 
-            if (this.selectedProject.getId() === projectId || this.selectedProject.getId() === 0) {
+            if (this.selectedProject.getId() === projectIdNumber) {
                 this.projectView.appendTodoItem(newTodo);
             }
         } else {
