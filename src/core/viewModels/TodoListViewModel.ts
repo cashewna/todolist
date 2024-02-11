@@ -2,6 +2,7 @@ import Project from '../models/Project';
 import Todo from '../models/Todo';
 import ProjectView from '../../views/ProjectView';
 import SidebarView from '../../views/SidebarView';
+import AddTodoDialogView from '../../views/AddTodoDialogView';
 
 const ALL_PROJECT_ID = 0;
 
@@ -11,11 +12,13 @@ class TodoListViewModel {
     private nextProjectId: number;
     private projectView: ProjectView;
     private sidebarView: SidebarView;
+    private addTodoDialogView: AddTodoDialogView;
 
     constructor() {
         this.projects = [];
         this.projectView = new ProjectView();
         this.sidebarView = new SidebarView(this);
+        this.addTodoDialogView = new AddTodoDialogView(this);
         this.nextProjectId = 0;
         this.addProject('All');
         this.setSelectedProject(ALL_PROJECT_ID);
