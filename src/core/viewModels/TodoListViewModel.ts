@@ -38,6 +38,7 @@ class TodoListViewModel {
     }
 
     public addTodoToSelectedProject(projectId: number, title: string, description?: string): void {
+        console.log('addTodoToSelectedProject');
         const project = this.projects.find(project => project.getId() === projectId);
         const allProject = this.projects[0];
 
@@ -45,6 +46,10 @@ class TodoListViewModel {
             const newTodo = new Todo(projectId, title, description);
             project.addTodo(newTodo);
             allProject.addTodo(newTodo);
+
+            if (this.selectedProject.getId() === projectId || this.selectedProject.getId() === 0) {
+                this.projectView.appendTodoItem(newTodo);
+            }
         } else {
             console.error(`Project with ID ${projectId} not found`);
         }

@@ -1,11 +1,11 @@
 import ITodo from '../interfaces/ITodo';
 
 class Todo implements ITodo {
-    id: number;
-    title: string;
-    description: string;
-    completed: boolean;
-    projectId: number;
+    private id: number;
+    private title: string;
+    private description: string;
+    private completed: boolean;
+    private projectId: number;
 
     private static nextId = 0;
 
@@ -15,6 +15,26 @@ class Todo implements ITodo {
         this.description = description || '';
         this.completed = false;
         this.projectId = projectId;
+    }
+
+    public getId(): number {
+        return this.id;
+    }
+
+    public getTitle(): string {
+        return this.title;
+    }
+
+    public getDescription(): string {
+        return this.description;
+    }
+
+    public isCompleted(): boolean {
+        return this.completed;
+    }
+
+    public getProjectId(): number {
+        return this.projectId;
     }
 }
 

@@ -1,7 +1,7 @@
-export default interface Todo {
-    id: number;
-    title: string;
-    description?: string;
-    completed: boolean;
-    projectId: number;
+export default interface ITodo {
+    getId(): number;
+    getTitle(): string;
+    getDescription(): string;
+    isCompleted(): boolean;
+    getProjectId(): number;
 }
