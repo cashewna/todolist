@@ -1,17 +1,20 @@
 import Project from '../models/Project';
-import ITodo from '../interfaces/ITodo';
 import Todo from '../models/Todo';
+import ProjectView from '../../views/ProjectView';
 
 class TodoListViewModel {
     private projects: Project[];
     private selectedProject: Project;
     private nextProjectId: number;
+    private projectView: ProjectView;
 
     constructor() {
+        this.projects = [];
         const allProject = new Project(0, 'All');
         this.projects.push(allProject);
-        this.selectedProject = allProject;
+        this.projectView = new ProjectView();
 
+        this.setSelectedProject(0);
         this.nextProjectId = 1;
     }
 
@@ -25,6 +28,7 @@ class TodoListViewModel {
 
     public setSelectedProject(projectId: number): void {
         this.selectedProject = this.projects.find(project => project.getId() === projectId);
+        this.projectView.updateProjectName(this.selectedProject.getName());
     }
 
     public addProject(name: string): void {
@@ -46,3 +50,5 @@ class TodoListViewModel {
         }
     }
 }
+
+export default TodoListViewModel;
