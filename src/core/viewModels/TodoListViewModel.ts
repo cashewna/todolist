@@ -75,10 +75,15 @@ class TodoListViewModel {
                 this.projectView.appendTodoItem(newTodo);
             }
         } else {
-            // Create a new project and add the todo to it
+            // Create a new project and add the todo to it and 'All'
             const newProject = this.addProject(projectName);
             const newTodo = new Todo(this.nextProjectId++, title, description);
             newProject.addTodo(newTodo);
+            allProject.addTodo(newTodo);
+
+            if (this.selectedProject.getId() === ALL_PROJECT_ID) {
+                this.projectView.appendTodoItem(newTodo);
+            }
         }
     }
 }
