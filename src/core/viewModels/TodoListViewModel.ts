@@ -1,21 +1,22 @@
 import Project from '../models/Project';
 import Todo from '../models/Todo';
 import ProjectView from '../../views/ProjectView';
+import SidebarView from '../../views/SidebarView';
 
 class TodoListViewModel {
     private projects: Project[];
     private selectedProject: Project;
     private nextProjectId: number;
     private projectView: ProjectView;
+    private sidebarView: SidebarView;
 
     constructor() {
         this.projects = [];
-        const allProject = new Project(0, 'All');
-        this.projects.push(allProject);
         this.projectView = new ProjectView();
-
+        this.sidebarView = new SidebarView();
+        this.nextProjectId = 0;
+        this.addProject('All');
         this.setSelectedProject(0);
-        this.nextProjectId = 1;
     }
 
     public getProjects(): Project[] {
@@ -35,6 +36,7 @@ class TodoListViewModel {
         const newProject = new Project(this.nextProjectId++, name);
         this.projects.push(newProject);
         // TODO: Update the view to include the new project
+        this.sidebarView.addProject(name);
     }
 
     public addTodoToSelectedProject(projectId: number, title: string, description?: string): void {

@@ -34,7 +34,7 @@ class ProjectView {
 
         checkbox.addEventListener('change', () => {
             todoDiv.classList.toggle('completed');
-        })
+        });
 
         const titleElement = document.createElement('span');
         titleElement.textContent = todo.getTitle();

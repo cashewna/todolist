@@ -1,0 +1,29 @@
+class SidebarView {
+    private hamburgerElement: HTMLElement;
+    private sidebarElement: HTMLElement;
+    private projectListElement: HTMLElement;
+
+    constructor() {
+        this.hamburgerElement = document.querySelector('#hamburger');
+        this.sidebarElement = document.querySelector('#sidebar');
+        this.projectListElement = document.querySelector('#project-list');
+
+        this.toggleSidebarOnHamburgerClick();
+    }
+
+    public addProject(projectName: string): void {
+        const projectListItem = document.createElement('li');
+        projectListItem.textContent = projectName;
+        this.projectListElement.appendChild(projectListItem);
+        console.log('adding project' + projectName);
+    }
+
+    private toggleSidebarOnHamburgerClick(): void {
+        this.hamburgerElement.addEventListener('click', () => {
+            this.hamburgerElement.classList.toggle('open');
+            this.sidebarElement.classList.toggle('open');
+        });
+    }
+}
+
+export default SidebarView;

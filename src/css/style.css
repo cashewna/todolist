@@ -134,7 +134,6 @@ header {
         height: 4rem;
     }
 
-    /** Bug: Dialog animation not working */
     @keyframes slideUp {
         from {
             transform: translateY(-110%);
