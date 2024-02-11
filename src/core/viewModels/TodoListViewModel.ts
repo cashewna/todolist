@@ -35,32 +35,33 @@ class TodoListViewModel {
     public setSelectedProject(projectId: number): void {
         this.selectedProject = this.projects.find(project => project.getId() === projectId);
         this.projectView.updateProjectName(this.selectedProject.getName());
-        console.log(this.selectedProject.getTodos());
         this.projectView.renderTodoList(this.selectedProject.getTodos());
     }
 
-    public addProject(name: string): void {
+    public addProject(name: string): Project {
         const newProject = new Project(this.nextProjectId++, name);
         this.projects.push(newProject);
         this.sidebarView.addProject(newProject.getId(), name);
+        return newProject;
     }
 
     public addTodoToSelectedProject(
-        projectId: string,
+        projectName: string,
         title: string,
         description?: string,
         dueDate?: string,
         priority?: string
     ): void {
-        const allProject = this.projects[0];
+        const allProject = this.projects[ALL_PROJECT_ID];
 
-        let projectIdNumber = parseInt(projectId as string);
-        if (isNaN(projectIdNumber)) {
-            projectIdNumber = ALL_PROJECT_ID;
+        if (projectName === "") {
+            projectName = "All";
         }
 
         // Check if project exists
-        const project = this.projects.find(project => project.getId() === projectIdNumber);
+        const project = this.projects.find(p => p.getName() === projectName);
+
+        let projectIdNumber = project ? project.getId() : null;
 
         if (project) {
             const newTodo = new Todo(projectIdNumber, title, description);
@@ -74,7 +75,10 @@ class TodoListViewModel {
                 this.projectView.appendTodoItem(newTodo);
             }
         } else {
-            console.error(`Project with ID ${projectId} not found`);
+            // Create a new project and add the todo to it
+            const newProject = this.addProject(projectName);
+            const newTodo = new Todo(this.nextProjectId++, title, description);
+            newProject.addTodo(newTodo);
         }
     }
 }
