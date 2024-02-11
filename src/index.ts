@@ -3,6 +3,7 @@ import TodoListViewModel from './core/viewModels/TodoListViewModel';
 
 const todoListViewModel = new TodoListViewModel();
 
-todoListViewModel.addTodoToSelectedProject(0, 'Test Todo', 'This is a test todo');
-todoListViewModel.addTodoToSelectedProject(0, 'Another Test Todo', 'This is another test todo');
+todoListViewModel.addTodoToSelectedProject("0", 'Uno', 'This is a test todo');
+todoListViewModel.addTodoToSelectedProject("0", 'Dos', 'This is another test todo');
 todoListViewModel.addProject('Test Project');
+todoListViewModel.addTodoToSelectedProject("1", 'Tres', 'This is a test todo for project 1');
