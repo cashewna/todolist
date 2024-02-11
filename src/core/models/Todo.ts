@@ -10,12 +10,13 @@ class Todo implements ITodo {
 
     private static nextId = 0;
 
-    constructor(projectId: number, title: string, description?: string) {
+    constructor(projectId: number, title: string, description?: string, priority?: number) {
         this.id = Todo.nextId++;
         this.title = title;
         this.description = description || '';
         this.completed = false;
         this.projectId = projectId;
+        this.priority = priority || 0;
     }
 
     public getId(): number {
