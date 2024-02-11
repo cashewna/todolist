@@ -109,10 +109,12 @@ header {
         padding: 0;
     }
 
-    .done {
-        h1,
-        p {
-            color: var(--500);
+    #todo-list {
+        .completed {
+            span,
+            p {
+                color: var(--500);
+            }
         }
     }
 

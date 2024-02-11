@@ -32,6 +32,10 @@ class ProjectView {
         checkbox.checked = todo.isCompleted();
         todoDiv.appendChild(checkbox);
 
+        checkbox.addEventListener('change', () => {
+            todoDiv.classList.toggle('completed');
+        })
+
         const titleElement = document.createElement('span');
         titleElement.textContent = todo.getTitle();
         todoDiv.appendChild(titleElement);
