@@ -13,9 +13,20 @@ class AddTodoDialogView {
     }
 
     private openDialogEventListener(button: HTMLButtonElement): void {
-        button.addEventListener('click', () => {
-            console.log('Add todo button clicked');
+        button.addEventListener('click', (event) => {
+            // Stop the propagation of the click event to prevent the
+            // dialog from immediately closing
+            event.stopPropagation();
             this.dialogElement.show();
+            this.closeDialogEventListener(this.dialogElement);
+        });
+    }
+
+    public closeDialogEventListener(dialogElement: HTMLDialogElement): void {
+        document.addEventListener('click', (event: MouseEvent) => {
+            if (!dialogElement.contains(event.target as Node)) {
+                dialogElement.close();
+            }
         });
     }
 }
