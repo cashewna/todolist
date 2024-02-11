@@ -15,6 +15,18 @@ class TodoItem {
         return this.model.getTitle();
     }
 
+    public getDescription(): string {
+        return this.model.getDescription();
+    }
+
+    public getDueDate(): Date {
+        return this.model.getDueDate();
+    }
+
+    public getPriority(): number {
+        return this.model.getPriority();
+    }
+
     public isCompleted(): boolean {
         return this.model.isCompleted();
     }

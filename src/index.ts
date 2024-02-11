@@ -3,33 +3,38 @@ import { ProjectInterface } from './interfaces/Project';
 import { ProjectModel } from './models/Project';
 import { ProjectViewModel } from './viewmodels/Project';
 import { ProjectView } from './views/Project';
-import { Observable } from './utils/Observable';
+import { ProjectManager } from './services/ProjectManager';
 
-// Initialise 'All' project view with empty todos
-const allProject: ProjectInterface = {
-    id: 0,
-    name: 'All',
-    todos: []
-};
+const projectManager = new ProjectManager();
 
-const allProjectViewModel = new ProjectViewModel(new ProjectModel(allProject));
-const allProjectView = new ProjectView(allProjectViewModel);
-const projectElement = allProjectView.render();
+function addProject(name: string) {
+    const projectModel = new ProjectModel(name);
+    const projectViewModel = new ProjectViewModel(projectModel);
+    const projectView = new ProjectView(projectViewModel);
 
-const content = document.getElementById('todo-list');
-content.appendChild(projectElement);
+    projectManager.addProject(projectViewModel);
 
-// Test Data
-allProjectViewModel.addTodo(
-    'Test Todo 1',
-    'This is a test todo',
-    new Date(),
-    1,
-    false
-);
+    const projectListElement = document.getElementById('project-list') as HTMLElement;
+    projectListElement.appendChild(projectView.renderProjectName());
+}
 
-const observable = new Observable();
-observable.subscribe(() => console.log('First subscriber notified!'));
-observable.subscribe(() => console.log('Second subscriber notified!'));
+function testAddTodo() {
+    const project = projectManager.getActiveProject();
+    if (project) {
+        project.addTodo('Test Todo', 'This is a test todo', new Date(), 1, false);
 
-observable.notify();
+        const todo = project.getTodos()[0];
+        console.assert(todo.getTitle() === 'Test Todo', 'Todo title is incorrect');
+        console.assert(todo.getDescription() === 'This is a test todo', 'Todo description is incorrect');
+        console.assert(todo.getPriority() === 1, 'Todo priority is incorrect');
+        console.assert(todo.isCompleted() === false, 'Todo completed status is incorrect');
+    }
+}
+
+(function main() {
+    addProject('All');
+})();
+
+(function test() {
+    testAddTodo();
+})();

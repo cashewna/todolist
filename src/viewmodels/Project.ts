@@ -1,12 +1,21 @@
 import { ProjectModel } from "../models/Project";
 import { TodoItemModel } from "../models/TodoItem";
 import { TodoItemViewModel } from './TodoItem';
+import { Observable } from "../utils/Observable";
 
 class Project {
     private model: ProjectModel;
+    private observable: Observable;
+    private isActive: boolean;
 
     constructor(model: ProjectModel) {
         this.model = model;
+        this.observable = new Observable();
+        this.isActive = false;
+    }
+
+    public subscribe(fn: Function) {
+        this.observable.subscribe(fn);
     }
 
     public addTodo(
@@ -27,6 +36,7 @@ class Project {
         });
 
         this.model.addTodo(newTodo);
+        this.observable.notify();
     }
 
     public getName(): string {
@@ -37,6 +47,11 @@ class Project {
         return this.model.getTodos().map(
             todoModel => new TodoItemViewModel(todoModel)
         );
+    }
+
+    public setActive(active: boolean) {
+        this.isActive = active;
+        this.observable.notify();
     }
 }
 

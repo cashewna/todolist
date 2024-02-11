@@ -2,10 +2,15 @@ import { ProjectInterface } from "../interfaces/Project";
 import { TodoItemModel } from "./TodoItem";
 
 class Project {
+    private static nextId = 0;
     private project: ProjectInterface;
 
-    constructor(project: ProjectInterface) {
-        this.project = project;
+    constructor(projectName: string) {
+        this.project = {
+            id: Project.nextId++,
+            name: projectName,
+            todos: []
+        }
     }
 
     public addTodo(todo: TodoItemModel) {
