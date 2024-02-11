@@ -6,6 +6,7 @@ class Todo implements ITodo {
     private description: string;
     private completed: boolean;
     private projectId: number;
+    private priority: number;
 
     private static nextId = 0;
 
@@ -35,6 +36,10 @@ class Todo implements ITodo {
 
     public getProjectId(): number {
         return this.projectId;
+    }
+
+    public getPriority(): number {
+        return this.priority;
     }
 }
 
