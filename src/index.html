@@ -20,11 +20,12 @@
 
     <div id="sidebar">
         <h1>Projects</h1>
-        <ul>
+        <ul id="project-list">
         </ul>
     </div>
 
     <div id="content">
+        <h1 id="project-name"></h1>
         <ul id="todo-list"></ul>
 
         <dialog id="add-todo-dialog">
@@ -43,6 +44,21 @@
     <footer>
         <span>&copy Krishna R. Khong 2024</span>
     </footer>
+
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker
+                    .register("service-worker.js")
+                    .then((registration) => {
+                        console.log("Service Worker registered: ", registration);
+                    })
+                    .catch((registrationError) => {
+                        console.error("Service Worker registration failed: ", registrationError);
+                    });
+            });
+        }
+    </script>
 </body>
 
 </html>

@@ -95,40 +95,26 @@ header {
 #content {
     background-color: var(--950);
     padding: 1rem;
+    height: calc(100vh - 10rem);
 
-    #todo-list>li {
-        display: grid;
-        grid-template-columns: 1fr 10fr;
-
-        .todo-checkbox {
-            grid-column: 1 / 2;
-            margin-top: 0.5rem;
-            transform: scale(1.5);
+    #todo-list {
+        span,
+        p {
+            color: var(--100);
+            margin-left: 1rem;
         }
-        margin-bottom: 1rem;
     }
-
     ul#todo-list {
         list-style: none;
         padding: 0;
     }
 
-    ul#todo-list li {
-        color: var(--100);
-        background-color: var(--700);
-        border-radius: 5px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        padding: 1rem;
-
-        h1 {
-            font-size: 1.5rem;
-        }
-    }
-
-    .done {
-        h1,
-        p {
-            color: var(--500);
+    #todo-list {
+        .completed {
+            span,
+            p {
+                color: var(--500);
+            }
         }
     }
 
@@ -148,7 +134,6 @@ header {
         height: 4rem;
     }
 
-    /** Bug: Dialog animation not working */
     @keyframes slideUp {
         from {
             transform: translateY(-110%);
@@ -194,7 +179,7 @@ header {
         }
     }
 
-    .project-title {
+    h1 {
         color: var(--50);
         font-size: 1.5rem;
         margin-bottom: 1rem;
