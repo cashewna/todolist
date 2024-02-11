@@ -13,7 +13,7 @@ class AddTodoDialogView {
         this.form = document.querySelector('#add-todo-form');
 
         this.openDialogEventListener(this.addTodoButton);
-        this.form.addTodoEventListener(this.form);
+        this.addTodoEventListener(this.form);
     }
 
     private openDialogEventListener(button: HTMLButtonElement): void {
