@@ -19,9 +19,7 @@ class SidebarView {
         const projectListItem = document.createElement('li');
         projectListItem.textContent = projectName;
         this.projectListElement.appendChild(projectListItem);
-        // TODO: add event listener to select project
         projectListItem.addEventListener('click', () => {
-            console.log('Project clicked', id, projectName);
             this.todoListViewModel.setSelectedProject(id);
         });
     }

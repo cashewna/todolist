@@ -30,9 +30,10 @@
 
         <dialog id="add-todo-dialog">
             <form id="add-todo-form">
-                <input type="text" name="title" id="todo-input" placeholder="What would you like to do?" required>
-                <input type="text" name="description" id="todo-input" placeholder="Description">
-                <input type="datetime-local" name="dueDate" id="todo-date">
+                <input type="text" name="title" class="todo-input" placeholder="What would you like to do? (Required)" required>
+                <input type="text" name="description" class="todo-input" placeholder="Description">
+                <input type="datetime-local" name="dueDate" class="todo-date">
+                <input type="text" name="projectName" class="todo-input" placeholder="Project Name">
                 <input type="number" name="priority" id="todo-priority" placeholder="Priority">
                 <button id="submit-todo">Add</button>
             </form>

@@ -2,7 +2,7 @@ import './css/style.css';
 import TodoListViewModel from './core/viewModels/TodoListViewModel';
 
 const todoListViewModel = new TodoListViewModel();
-
-todoListViewModel.addTodoToSelectedProject(0, 'Test Todo', 'This is a test todo');
-todoListViewModel.addTodoToSelectedProject(0, 'Another Test Todo', 'This is another test todo');
+todoListViewModel.addTodoToSelectedProject("All", 'Uno', 'This is a test todo');
+todoListViewModel.addTodoToSelectedProject("All", 'Dos', 'This is another test todo');
 todoListViewModel.addProject('Test Project');
+todoListViewModel.addTodoToSelectedProject("Test Project", 'Tres', 'This is a test todo for project 1');

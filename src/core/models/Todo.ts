@@ -6,15 +6,17 @@ class Todo implements ITodo {
     private description: string;
     private completed: boolean;
     private projectId: number;
+    private priority: number;
 
     private static nextId = 0;
 
-    constructor(projectId: number, title: string, description?: string) {
+    constructor(projectId: number, title: string, description?: string, priority?: number) {
         this.id = Todo.nextId++;
         this.title = title;
         this.description = description || '';
         this.completed = false;
         this.projectId = projectId;
+        this.priority = priority || 0;
     }
 
     public getId(): number {
@@ -35,6 +37,10 @@ class Todo implements ITodo {
 
     public getProjectId(): number {
         return this.projectId;
+    }
+
+    public getPriority(): number {
+        return this.priority;
     }
 }
 
