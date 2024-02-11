@@ -1,9 +1,13 @@
+import TodoListViewModel from "../core/viewModels/TodoListViewModel";
+
 class SidebarView {
     private hamburgerElement: HTMLElement;
     private sidebarElement: HTMLElement;
     private projectListElement: HTMLElement;
+    private todoListViewModel: TodoListViewModel;
 
-    constructor() {
+    constructor(todoListViewModel: TodoListViewModel) {
+        this.todoListViewModel = todoListViewModel;
         this.hamburgerElement = document.querySelector('#hamburger');
         this.sidebarElement = document.querySelector('#sidebar');
         this.projectListElement = document.querySelector('#project-list');
@@ -11,11 +15,15 @@ class SidebarView {
         this.toggleSidebarOnHamburgerClick();
     }
 
-    public addProject(projectName: string): void {
+    public addProject(id: number, projectName: string): void {
         const projectListItem = document.createElement('li');
         projectListItem.textContent = projectName;
         this.projectListElement.appendChild(projectListItem);
-        console.log('adding project' + projectName);
+        // TODO: add event listener to select project
+        projectListItem.addEventListener('click', () => {
+            console.log('Project clicked', id, projectName);
+            this.todoListViewModel.setSelectedProject(id);
+        });
     }
 
     private toggleSidebarOnHamburgerClick(): void {

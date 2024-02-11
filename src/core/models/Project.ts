@@ -20,7 +20,16 @@ class Project {
     }
 
     public addTodo(todo: Todo): void {
-        this.todos.push(todo);
+        const todoExists = this.todos.find(t => t.getId() === todo.getId());
+        if (!todoExists) {
+            this.todos.push(todo);
+        } else {
+            console.log(`Todo "${todo.getTitle()}" already exists in project`);
+        }
+    }
+
+    public getTodos(): Todo[] {
+        return this.todos;
     }
 }
 

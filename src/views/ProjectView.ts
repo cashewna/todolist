@@ -15,7 +15,7 @@ class ProjectView {
         }
     }
 
-    public renderToDoList(todos: Todo[]): void {
+    public renderTodoList(todos: Todo[]): void {
         this.todoListElement.innerHTML = '';
         todos.forEach(todo => {
             const todoDiv = this.createTodoDiv(todo);
