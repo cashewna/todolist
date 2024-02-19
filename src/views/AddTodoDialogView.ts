@@ -46,6 +46,7 @@ class AddTodoDialogView {
             const priority = formData.get('priority') as string;
 
             this.todoListViewModel.addTodoToSelectedProject(projectName, title, description, dueDate, priority);
+            this.dialogElement.close();
         });
     }
 }
