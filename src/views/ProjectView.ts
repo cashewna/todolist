@@ -43,12 +43,26 @@ class ProjectView {
         const descriptionElement = document.createElement('p');
         descriptionElement.textContent = todo.getDescription();
         todoDiv.appendChild(descriptionElement);
+
+        const removeButton = this.createRemoveButton();
+        removeButton.classList.add('remove-todo');
+        todoDiv.appendChild(removeButton);
+
         return todoDiv;
     }
 
     public appendTodoItem(todo: Todo): void {
         const todoDiv = this.createTodoDiv(todo);
         this.todoListElement.appendChild(todoDiv);
+    }
+
+    public createRemoveButton(): HTMLButtonElement {
+        const removeButton = document.createElement('button');
+        removeButton.addEventListener('click', () => {
+            console.log('Remove button clicked');
+        });
+
+        return removeButton;
     }
 }
 

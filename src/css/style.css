@@ -116,6 +116,27 @@ header {
                 color: var(--500);
             }
         }
+
+        .todo {
+            display: grid;
+            grid-template-columns: 1fr 6fr 1fr;
+            grid-template-rows: 1fr 2fr;
+
+            input {
+                grid-column: 1 / 2;
+                grid-row: 1 / 2;
+            }
+
+            span {
+                grid-column: 2 / 3;
+                grid-row: 1 / 2;
+            }
+
+            p {
+                grid-column: 2 / 3;
+                grid-row: 2 / 3;
+            }
+        }
     }
 
     #add-todo-btn {
@@ -183,6 +204,16 @@ header {
         color: var(--50);
         font-size: 1.5rem;
         margin-bottom: 1rem;
+    }
+
+    .remove-todo {
+        height: 2rem;
+        width: 2rem;
+        background-image: url('../assets/trash.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        background-color: var(--900);
     }
 }
 
