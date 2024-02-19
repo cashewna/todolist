@@ -28,6 +28,13 @@ class Project {
         }
     }
 
+    public removeTodo(todoId: number): void {
+        const todoIndex = this.todos.findIndex(t => t.getId() === todoId);
+        if (todoIndex !== -1) {
+            this.todos.splice(todoIndex, 1);
+        }
+    }
+
     public getTodos(): Todo[] {
         return this.todos;
     }
