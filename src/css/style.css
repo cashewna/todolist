@@ -214,6 +214,7 @@ header {
         background-position: center;
         background-size: contain;
         background-color: var(--900);
+        border: none;
     }
 }
 
