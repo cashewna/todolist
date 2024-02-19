@@ -216,6 +216,10 @@ header {
         background-color: var(--900);
         border: none;
     }
+
+    .remove-todo:active {
+        background-color: var(--600);
+    }
 }
 
 footer {
