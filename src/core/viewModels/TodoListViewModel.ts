@@ -120,18 +120,17 @@ class TodoListViewModel {
 
     public serializeTodoList(): string {
         return JSON.stringify({
-            // TODO: Only serialize All projects for performance
-            projects: this.projects.map(project => project.toJSON()),
+            projects: this.projects[ALL_PROJECT_ID],
             nextProjectId: this.nextProjectId
         });
     }
 
     public deserializeTodoList(serializedTodoList: string): void {
         console.log(`Deserializing: ${serializedTodoList}`);
-        const parsedTodoList: ProjectData[] = JSON.parse(serializedTodoList).projects;
-        for (let i = 0; i < parsedTodoList[ALL_PROJECT_ID].todos.length; i++) {
-            const parsedTodo = parsedTodoList[ALL_PROJECT_ID].todos[i];
-            console.log(parsedTodoList[ALL_PROJECT_ID].todos[i]);
+        const parsedTodoList: ProjectData = JSON.parse(serializedTodoList).projects;
+        for (let i = 0; i < parsedTodoList.todos.length; i++) {
+            const parsedTodo = parsedTodoList.todos[i];
+            console.log(parsedTodoList.todos[i]);
             this.addTodoToSelectedProject(parsedTodo.projectTitle, parsedTodo.title, parsedTodo.description, parsedTodo.dueDate, parsedTodo.priority);
         }
     }
