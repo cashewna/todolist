@@ -38,6 +38,14 @@ class Project {
     public getTodos(): Todo[] {
         return this.todos;
     }
+
+    public toJSON(): object {
+        return {
+            id: this.id,
+            name: this.name,
+            todos: this.todos.map(todo => todo.toJSON())
+        }
+    }
 }
 
 export default Project;

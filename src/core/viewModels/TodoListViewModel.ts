@@ -3,6 +3,7 @@ import Todo from '../models/Todo';
 import ProjectView from '../../views/ProjectView';
 import SidebarView from '../../views/SidebarView';
 import AddTodoDialogView from '../../views/AddTodoDialogView';
+import ProjectData from '../interfaces/ProjectData';
 
 const ALL_PROJECT_ID = 0;
 
@@ -22,6 +23,8 @@ class TodoListViewModel {
         this.nextProjectId = 0;
         this.addProject('All');
         this.setSelectedProject(ALL_PROJECT_ID);
+        this.addTodoToSelectedProject = this.addTodoToSelectedProject.bind(this);
+        console.log('Constructor:', this.projects);
     }
 
     public getProjects(): Project[] {
@@ -45,18 +48,20 @@ class TodoListViewModel {
         return newProject;
     }
 
-    public addTodoToSelectedProject(
+    public addTodoToSelectedProject = (
         projectName: string,
         title: string,
         description?: string,
-        dueDate?: string,
-        priority?: string
-    ): void {
+        dueDate?: string | Date,
+        priority?: string | number
+    ): void => {
+        console.log(`addTodoToSelectedProjects:`, this.projects);
         const allProject = this.projects[ALL_PROJECT_ID];
 
         if (projectName === "") {
             projectName = "All";
         }
+
 
         // Check if project exists
         const project = this.projects.find(p => p.getName() === projectName);
@@ -64,7 +69,7 @@ class TodoListViewModel {
         let projectIdNumber = project ? project.getId() : null;
 
         if (project) {
-            const newTodo = new Todo(projectIdNumber, title, description);
+            const newTodo = new Todo(projectIdNumber, projectName, title, description);
             project.addTodo(newTodo);
 
             if (projectIdNumber !== ALL_PROJECT_ID) {
@@ -79,7 +84,7 @@ class TodoListViewModel {
         } else {
             // Create a new project and add the todo to it and 'All'
             const newProject = this.addProject(projectName);
-            const newTodo = new Todo(newProject.getId(), title, description);
+            const newTodo = new Todo(newProject.getId(), projectName, title, description);
             newProject.addTodo(newTodo);
             allProject.addTodo(newTodo);
             if (this.selectedProject.getId() === ALL_PROJECT_ID) {
@@ -110,6 +115,36 @@ class TodoListViewModel {
             // Delete the project from All project
             const allProject = this.projects[ALL_PROJECT_ID];
             allProject.removeTodo(todoId);
+        }
+    }
+
+    public serializeTodoList(): string {
+        return JSON.stringify({
+            // TODO: Only serialize All projects for performance
+            projects: this.projects.map(project => project.toJSON()),
+            nextProjectId: this.nextProjectId
+        });
+    }
+
+    public deserializeTodoList(serializedTodoList: string): void {
+        console.log(`Deserializing: ${serializedTodoList}`);
+        const parsedTodoList: ProjectData[] = JSON.parse(serializedTodoList).projects;
+        for (let i = 0; i < parsedTodoList[ALL_PROJECT_ID].todos.length; i++) {
+            const parsedTodo = parsedTodoList[ALL_PROJECT_ID].todos[i];
+            console.log(parsedTodoList[ALL_PROJECT_ID].todos[i]);
+            this.addTodoToSelectedProject(parsedTodo.projectTitle, parsedTodo.title, parsedTodo.description, parsedTodo.dueDate, parsedTodo.priority);
+        }
+    }
+
+    public saveTodoListToLocalStorage(): void {
+        const serializedTodoList = this.serializeTodoList();
+        localStorage.setItem('todoList', serializedTodoList);
+    }
+
+    public loadTodoListFromLocalStorage(): void {
+        const serializedTodoList = localStorage.getItem('todoList');
+        if (serializedTodoList) {
+            this.deserializeTodoList(serializedTodoList);
         }
     }
 }
