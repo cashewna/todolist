@@ -29,18 +29,34 @@ header {
     background-color: var(--900);
     display: flex;
     justify-content: space-between;
+    padding: 1rem;
 
     span {
         font-size: 1.5rem;
     }
 
-    button {
-        background-color: var(--800);
-        color: var(--50);
-        padding: 1rem;
-        border-radius: 0.5rem;
-        border: none;
-        margin: 1rem;
+    #hamburger {
+        .bar1,
+        .bar2,
+        .bar3 {
+            width: 35px;
+            height: 5px;
+            background-color: var(--50);
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+    }
+
+    .open .bar1 {
+        transform: translate(0, 11px) rotate(-45deg);
+    }
+
+    .open .bar2 {
+        opacity: 0;
+    }
+
+    .open .bar3 {
+        transform: translate(0, -11px) rotate(45deg);
     }
 }
 
@@ -52,6 +68,24 @@ header {
     background-color: var(--800);
     transition: right 0.3s ease;
     z-index: 101;
+    padding: 1rem;
+
+    h1 {
+        color: var(--50);
+        font-size: 1.5rem;
+    }
+
+    ul {
+        padding: 0.5rem;
+    }
+
+    li {
+        list-style: none;
+        margin: 0.5rem 0;
+        padding: 0;
+        color: var(--50);
+        font-size: 1.2rem;
+    }
 }
 
 #sidebar.open {
@@ -60,40 +94,48 @@ header {
 
 #content {
     background-color: var(--950);
-    padding-top: 1rem;
+    padding: 1rem;
+    height: calc(100vh - 10rem);
 
-    #todo-list > li {
-        display: grid;
-        grid-template-columns: 1fr 10fr;
-        .todo-checkbox {
-            grid-column: 1 / 2;
-            margin-top: 0.5rem;
-            transform: scale(1.5);
+    #todo-list {
+        span,
+        p {
+            color: var(--100);
+            margin-left: 1rem;
         }
     }
-
     ul#todo-list {
         list-style: none;
         padding: 0;
     }
 
-    ul#todo-list li {
-        color: var(--100);
-        background-color: var(--700);
-        border-radius: 5px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        padding: 1rem;
-        margin: 0.5rem;
-
-        h1 {
-            font-size: 1.5rem;
+    #todo-list {
+        .completed {
+            span,
+            p {
+                color: var(--500);
+            }
         }
-    }
 
-    .done {
-        h1,
-        p {
-            color: var(--500);
+        .todo {
+            display: grid;
+            grid-template-columns: 1fr 6fr 1fr;
+            grid-template-rows: 1fr 2fr;
+
+            input {
+                grid-column: 1 / 2;
+                grid-row: 1 / 2;
+            }
+
+            span {
+                grid-column: 2 / 3;
+                grid-row: 1 / 2;
+            }
+
+            p {
+                grid-column: 2 / 3;
+                grid-row: 2 / 3;
+            }
         }
     }
 
@@ -113,11 +155,11 @@ header {
         height: 4rem;
     }
 
-    /** Bug: Dialog animation not working */
     @keyframes slideUp {
         from {
             transform: translateY(-110%);
         }
+
         to {
             transform: translateY(0%);
         }
@@ -140,6 +182,7 @@ header {
             display: flex;
             flex-direction: column;
             gap: 1rem;
+
             input {
                 padding: 1rem;
                 border-radius: 0.5rem;
@@ -156,6 +199,27 @@ header {
             }
         }
     }
+
+    h1 {
+        color: var(--50);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .remove-todo {
+        height: 2rem;
+        width: 2rem;
+        background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KCjxzdmcgZmlsbD0iI2ZmZmZmZiIgdmlld0JveD0iLTYuNyAwIDEyMi44OCAxMjIuODgiIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEwOS40ODQgMTIyLjg4IiB4bWw6c3BhY2U9InByZXNlcnZlIiBzdHJva2U9IiNmZmZmZmYiPjxnIGlkPSJTVkdSZXBvX2JnQ2FycmllciIgc3Ryb2tlLXdpZHRoPSIwIj48L2c+PGcgaWQ9IlNWR1JlcG9fdHJhY2VyQ2FycmllciIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48L2c+PGcgaWQ9IlNWR1JlcG9faWNvbkNhcnJpZXIiPiA8Zz4gPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yLjM0Nyw5LjYzM2gzOC4yOTdWMy43NmMwLTIuMDY4LDEuNjg5LTMuNzYsMy43Ni0zLjc2aDIxLjE0NCBjMi4wNywwLDMuNzYsMS42OTEsMy43NiwzLjc2djUuODc0aDM3LjgzYzEuMjkzLDAsMi4zNDcsMS4wNTcsMi4zNDcsMi4zNDl2MTEuNTE0SDBWMTEuOTgyQzAsMTAuNjksMS4wNTUsOS42MzMsMi4zNDcsOS42MzMgTDIuMzQ3LDkuNjMzeiBNOC42OSwyOS42MDVoOTIuOTIxYzEuOTM3LDAsMy42OTYsMS41OTksMy41MjEsMy41MjRsLTcuODY0LDg2LjIyOWMtMC4xNzQsMS45MjYtMS41OSwzLjUyMS0zLjUyMywzLjUyMWgtNzcuMyBjLTEuOTM0LDAtMy4zNTItMS41OTItMy41MjQtMy41MjFMNS4xNjYsMzMuMTI5QzQuOTk0LDMxLjE5Nyw2Ljc1MSwyOS42MDUsOC42OSwyOS42MDVMOC42OSwyOS42MDV6IE02OS4wNzcsNDIuOTk4aDkuODY2djY1LjMxNCBoLTkuODY2VjQyLjk5OEw2OS4wNzcsNDIuOTk4eiBNMzAuMDcyLDQyLjk5OGg5Ljg2N3Y2NS4zMTRoLTkuODY3VjQyLjk5OEwzMC4wNzIsNDIuOTk4eiBNNDkuNTcyLDQyLjk5OGg5Ljg2OXY2NS4zMTRoLTkuODY5IFY0Mi45OThMNDkuNTcyLDQyLjk5OHoiPjwvcGF0aD4gPC9nPiA8L2c+PC9zdmc+);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        background-color: var(--900);
+        border: none;
+    }
+
+    .remove-todo:active {
+        background-color: var(--600);
+    }
 }
 
 footer {
@@ -169,8 +233,8 @@ footer {
     align-items: center;
 }
 
-header > span,
-footer > span {
+header>span,
+footer>span {
     color: var(--50);
     margin-left: 1rem;
 }

@@ -1,53 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Todo List</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-<script defer src="main.js"></script></head>
-
-<body>
-    <header>
-        <span>Todo List</span>
-        <div id="hamburger" class="hamburger">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-        </div>
-    </header>
-
-
-    <div id="sidebar">
-        <h1>Projects</h1>
-        <ul id="project-list">
-        </ul>
-    </div>
-
-    <div id="content">
-        <h1 id="project-name"></h1>
-        <ul id="todo-list"></ul>
-
-        <dialog id="add-todo-dialog">
-            <form id="add-todo-form">
-                <input type="text" name="title" class="todo-input" placeholder="What would you like to do? (Required)" required>
-                <input type="text" name="description" class="todo-input" placeholder="Description">
-                <input type="datetime-local" name="dueDate" class="todo-date">
-                <input type="text" name="projectName" class="todo-input" placeholder="Project Name">
-                <input type="number" name="priority" id="todo-priority" placeholder="Priority">
-                <button id="submit-todo">Add</button>
-            </form>
-        </dialog>
-
-        <button id="add-todo-btn"></button>
-    </div>
-
-    <footer>
-        <span>&copy Krishna R. Khong 2024</span>
-    </footer>
-
-    <script>
-        if ("serviceWorker" in navigator) {
+<!doctype html><html lang="en"><head><title>Todo List</title><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script defer="defer" src="main.js"></script><link href="main.css" rel="stylesheet"></head><body><header><span>Todo List</span><div id="hamburger" class="hamburger"><div class="bar1"></div><div class="bar2"></div><div class="bar3"></div></div></header><div id="sidebar"><h1>Projects</h1><ul id="project-list"></ul></div><div id="content"><h1 id="project-name"></h1><ul id="todo-list"></ul><dialog id="add-todo-dialog"><form id="add-todo-form"><input name="title" class="todo-input" placeholder="What would you like to do? (Required)" required> <input name="description" class="todo-input" placeholder="Description"> <input type="datetime-local" name="dueDate" class="todo-date"> <input name="projectName" class="todo-input" placeholder="Project Name"> <input type="number" name="priority" id="todo-priority" placeholder="Priority"> <button id="submit-todo">Add</button></form></dialog><button id="add-todo-btn"></button></div><footer><span>&copy Krishna R. Khong 2024</span></footer><script>if ("serviceWorker" in navigator) {
             window.addEventListener("load", () => {
                 navigator.serviceWorker
                     .register("service-worker.js")
@@ -58,8 +9,4 @@
                         console.error("Service Worker registration failed: ", registrationError);
                     });
             });
-        }
-    </script>
-</body>
-
-</html>
+        }</script></body></html>
