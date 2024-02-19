@@ -106,6 +106,10 @@ class TodoListViewModel {
             if (project) {
                 project.removeTodo(todoId);
             }
+        } else {
+            // Delete the project from All project
+            const allProject = this.projects[ALL_PROJECT_ID];
+            allProject.removeTodo(todoId);
         }
     }
 }
