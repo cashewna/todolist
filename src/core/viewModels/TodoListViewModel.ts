@@ -16,7 +16,7 @@ class TodoListViewModel {
 
     constructor() {
         this.projects = [];
-        this.projectView = new ProjectView();
+        this.projectView = new ProjectView(this);
         this.sidebarView = new SidebarView(this);
         this.addTodoDialogView = new AddTodoDialogView(this);
         this.nextProjectId = 0;
@@ -73,17 +73,43 @@ class TodoListViewModel {
 
             if (this.selectedProject.getId() === projectIdNumber) {
                 this.projectView.appendTodoItem(newTodo);
+            } else if (this.selectedProject.getId() === ALL_PROJECT_ID) {
+                this.projectView.appendTodoItem(newTodo);
             }
         } else {
             // Create a new project and add the todo to it and 'All'
             const newProject = this.addProject(projectName);
-            const newTodo = new Todo(this.nextProjectId++, title, description);
+            const newTodo = new Todo(newProject.getId(), title, description);
             newProject.addTodo(newTodo);
             allProject.addTodo(newTodo);
-
             if (this.selectedProject.getId() === ALL_PROJECT_ID) {
                 this.projectView.appendTodoItem(newTodo);
             }
+        }
+
+    }
+
+    public removeTodo(projectId: number, todoId: number): void {
+        this.selectedProject.removeTodo(todoId);
+        this.projectView.renderTodoList(this.selectedProject.getTodos());
+
+        if (this.selectedProject.getId() === ALL_PROJECT_ID) {
+            // Look for the project that contains the todo and remove it from there
+            let project = null;
+            for (let i = 1; i < this.projects.length; i++) {
+                if (this.projects[i].getId() === projectId) {
+                    project = this.projects[i];
+                    break;
+                }
+            }
+
+            if (project) {
+                project.removeTodo(todoId);
+            }
+        } else {
+            // Delete the project from All project
+            const allProject = this.projects[ALL_PROJECT_ID];
+            allProject.removeTodo(todoId);
         }
     }
 }

@@ -1,10 +1,13 @@
 import Todo from '../core/models/Todo';
+import TodoListViewModel from '../core/viewModels/TodoListViewModel';
 
 class ProjectView {
     private projectNameElement: HTMLElement;
     private todoListElement: HTMLElement;
+    private todoListViewModel: TodoListViewModel;
 
-    constructor() {
+    constructor(todoListViewModel: TodoListViewModel) {
+        this.todoListViewModel = todoListViewModel;
         this.projectNameElement = document.querySelector('#project-name');
         this.todoListElement = document.querySelector('#todo-list');
     }
@@ -43,12 +46,26 @@ class ProjectView {
         const descriptionElement = document.createElement('p');
         descriptionElement.textContent = todo.getDescription();
         todoDiv.appendChild(descriptionElement);
+
+        const removeButton = this.createRemoveButton(todo.getProjectId(), todo.getId());
+        removeButton.classList.add('remove-todo');
+        todoDiv.appendChild(removeButton);
+
         return todoDiv;
     }
 
     public appendTodoItem(todo: Todo): void {
         const todoDiv = this.createTodoDiv(todo);
         this.todoListElement.appendChild(todoDiv);
+    }
+
+    public createRemoveButton(projectId:number, todoId: number): HTMLButtonElement {
+        const removeButton = document.createElement('button');
+        removeButton.addEventListener('click', () => {
+            this.todoListViewModel.removeTodo(projectId, todoId);
+        });
+
+        return removeButton;
     }
 }
 
